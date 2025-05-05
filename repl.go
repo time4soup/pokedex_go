@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/time4soup/pokedex_go/internal/poke_api_client"
 )
 
 func repl() {
@@ -87,7 +89,7 @@ func commandMap(c *Config) error {
 		url = "https://pokeapi.co/api/v2/location-area"
 	}
 
-	mapRes := pokeApiGet(url)
+	mapRes := poke_api_client.PokeApiGet(url)
 	if mapRes.Next == nil {
 		c.next = ""
 	} else {
@@ -111,7 +113,7 @@ func commandMapB(c *Config) error {
 		url = "https://pokeapi.co/api/v2/location-area"
 	}
 
-	mapRes := pokeApiGet(url)
+	mapRes := poke_api_client.PokeApiGet(url)
 	if mapRes.Next == nil {
 		c.next = ""
 	} else {

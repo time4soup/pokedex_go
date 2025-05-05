@@ -1,4 +1,4 @@
-package client
+package poke_api_client
 
 import (
 	"encoding/json"
@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func pokeApiGet(url string) MapResponse {
+func PokeApiGet(url string) MapResponse {
 	res, err := http.Get(url)
 	if err != nil {
 		log.Fatal(err)

@@ -1,4 +1,4 @@
-package client
+package poke_api_client
 
 // type MapItem struct {
 // 	Name string `json:"name"`
