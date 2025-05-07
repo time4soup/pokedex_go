@@ -14,12 +14,13 @@ func commandMapB(cfg *Config) error {
 	}
 
 	body, ok := cfg.cache.Get(url)
+	var err error
 	if !ok {
-		body = poke_api_client.Get(url)
+		body, err = poke_api_client.Get(url)
+		if err != nil {
+			return err
+		}
 		cfg.cache.Add(url, body)
-		fmt.Printf("cached %s\n", url) //debugging
-	} else {
-		fmt.Printf("using cache %s\n", url) //debugging
 	}
 
 	locList := UnmarshalType(body, &poke_api_client.LocationAreaList{})

@@ -4,6 +4,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/time4soup/pokedex_go/internal/poke_api_client"
 	"github.com/time4soup/pokedex_go/internal/pokecache"
 )
 
@@ -67,6 +68,7 @@ func TestCaching(t *testing.T) {
 		nil,
 		pokecache.NewCache(time.Second),
 		[]string{},
+		map[string]poke_api_client.Pokemon{},
 	}
 
 	body, cached := config.cache.Get("https://pokeapi.co/api/v2/location-area?offset=0&limit=20")

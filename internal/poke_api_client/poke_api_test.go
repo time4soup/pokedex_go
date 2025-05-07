@@ -17,7 +17,7 @@ func TestGet(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		dat := Get(c.url)
+		dat, _ := Get(c.url)
 
 		if dat == nil {
 			t.Errorf("data not retreived. url: %s", c.url)

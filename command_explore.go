@@ -6,20 +6,21 @@ import (
 	"github.com/time4soup/pokedex_go/internal/poke_api_client"
 )
 
+// makes call to get info for given area and prints list of pokemon there
 func commandExplore(cfg *Config) error {
-	if len(cfg.commands) < 2 {
-		fmt.Print(cfg.commands)
-		return fmt.Errorf("missing location argument (explore <location>)")
+	if len(cfg.commands) != 2 {
+		return fmt.Errorf("invalid exploration arguments (explore <location>)")
 	}
 	url := fmt.Sprint("https://pokeapi.co/api/v2/location-area/", cfg.commands[1])
 
 	body, ok := cfg.cache.Get(url)
+	var err error
 	if !ok {
-		body = poke_api_client.Get(url)
+		body, err = poke_api_client.Get(url)
+		if err != nil {
+			return err
+		}
 		cfg.cache.Add(url, body)
-		fmt.Printf("cached %s\n", url)
-	} else {
-		fmt.Printf("using cache %s\n", url)
 	}
 
 	locArea := UnmarshalType(body, &poke_api_client.LocationArea{})

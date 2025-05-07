@@ -7,17 +7,20 @@ import (
 	"strings"
 	"time"
 
+	"github.com/time4soup/pokedex_go/internal/poke_api_client"
 	"github.com/time4soup/pokedex_go/internal/pokecache"
 )
 
 // prompts input and repeatedly reads, cleans, and executes input commands matching regsitry commands
 func repl() {
 	scanner := bufio.NewScanner(os.Stdin)
+	pokedex := map[string]poke_api_client.Pokemon{}
 	cfg := Config{
 		nil,
 		nil,
 		pokecache.NewCache(time.Second * 5),
 		[]string{},
+		pokedex,
 	}
 
 	fmt.Print("Pokedex > ")
